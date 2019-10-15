@@ -373,7 +373,7 @@ function is_admin_logged_in(){
         return FALSE;
     
     $admin_user_sess_data = $_SESSION[ADMIN_USER_SESS_KEY]; //admin user session array
-    if( !empty($admin_user_sess_data) &&  $admin_user_sess_data['userId']) {
+    if( !empty($admin_user_sess_data) &&  $admin_user_sess_data['adminId']) {
        return TRUE;
     }
     return FALSE;  

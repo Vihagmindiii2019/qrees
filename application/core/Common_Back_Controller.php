@@ -21,7 +21,7 @@ class Common_Back_Controller extends MX_Controller {
      */
     public function check_admin_user_session(){
         $page_slug = $this->router->fetch_method();
-        $allowed_pages = array('admin'); //these pages/methods do not require user authentication
+        $allowed_pages = array('index','login'); //these pages/methods do not require user authentication
         $allowed_control = 'admin'; //methods of this controller does not require authentication
         $current_control = $this->router->fetch_class(); // get current controller, class = controller
         
@@ -31,13 +31,13 @@ class Common_Back_Controller extends MX_Controller {
             //either page is resticted or session exist
             
             if(!is_admin_logged_in()){
-                redirect(''); //redirect to home/login if session not exit
+                redirect('admin'); //redirect to home/login if session not exit
             }
             
             //user session exists
             $user_sess_data = $_SESSION[ $this->admin_user_session_key ]; //user session array
-            $session_u_id = $user_sess_data['id']; //user ID
-            $where = array('id'=>$session_u_id,'status'=>0); //status:0 means active 
+            $session_u_id = $user_sess_data['adminId']; //user ID
+            $where = array('adminId'=>$session_u_id,'status'=>0); //status:0 means active 
             $check = $this->common_model->is_data_exists($this->tbl_users,$where);
 
             if($check === FALSE){
@@ -49,9 +49,9 @@ class Common_Back_Controller extends MX_Controller {
                return TRUE; //if slug is empty and session is set
             }
             
-            $after_auth = array('admin'); //restrict access to these pages if session is set
+            $after_auth = array('index'); //restrict access to these pages if session is set
             if(in_array($page_slug,$after_auth) && $current_control == $allowed_control){
-                redirect('dashboard');
+                redirect('admin/dashboard');
             }else{
                 return TRUE; 
             }
@@ -89,7 +89,7 @@ class Common_Back_Controller extends MX_Controller {
 
         //user session exists
         $user_data = get_admin_session_data();
-        $where = array('id'=>$user_data['id'],'status'=>0); //status:0 means active 
+        $where = array('adminId'=>$user_data['adminId'],'status'=>0); //status:0 means active 
         $check = $this->common_model->is_data_exists($this->tbl_users,$where);
 
         if($check===FALSE){

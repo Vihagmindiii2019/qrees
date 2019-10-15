@@ -20,7 +20,7 @@ class Service extends Common_Service_Controller{
         $data['deviceToken'] = $this->post('deviceToken');
         $data['deviceType']  = $this->post('deviceType');
 
-        $exist = $this->Common_model->getsingle(USER, array('email'=>$data['email']));
+        $exist = $this->common_model->getsingle(USER, array('email'=>$data['email']));
         if($exist){ // Email Already exist
            $response=array('status'=>FAIL, 'message'=>get_response_message(110));
             $this->response($response); 
@@ -120,7 +120,7 @@ class Service extends Common_Service_Controller{
             $this->response($response);
         }
         // get user details 
-        $result = $this->Common_model->getsingle(USER, array('email'=> sanitize_input_text($this->post('email'))));  
+        $result = $this->common_model->getsingle(USER, array('email'=> sanitize_input_text($this->post('email'))));  
         if(!$result){//check email exist or not
             $response = array('status'=>FAIL,'message'=> get_response_message(115));
             $this->response($response);  
@@ -136,7 +136,7 @@ class Service extends Common_Service_Controller{
         //hash password
         $new_password = password_hash($random, PASSWORD_DEFAULT);
         //update password in table
-        $updateData = $this->Common_model->updateFields(USER, array('password'=>$new_password, 'upd' =>datetime()), array('userId'=>$result->userId));
+        $updateData = $this->common_model->updateFields(USER, array('password'=>$new_password, 'upd' =>datetime()), array('userId'=>$result->userId));
         
         //set data for mail user 
         $data['name'] = $result->userName;
@@ -164,7 +164,7 @@ class Service extends Common_Service_Controller{
         //get user id from auth data
         $userId  = $this->authData->userId;
         //empty device token on when user logged out
-        $logout = $this->Common_model->updateFields(USER, array('deviceToken' =>'','authToken'=>''),array('userId'=>$userId ));
+        $logout = $this->common_model->updateFields(USER, array('deviceToken' =>'','authToken'=>''),array('userId'=>$userId ));
         //set msg for success
         $response = array('status'=>SUCCESS,'message'=>get_response_message(125));
         $this->response($response);

@@ -7,7 +7,7 @@ class Service_model extends CI_Model {
 	function user_signup($data){
 		
         $data['authToken'] = $this->generate_token();
-		$result = $this->Common_model->insertData(USER,$data);
+		$result = $this->common_model->insertData(USER,$data);
 		 
 		$user_data  = $this->get_user_by_id($result); //echo 12; pr($user_data);
         return array('status'=>'RS','user_data'=>$user_data);
@@ -15,7 +15,7 @@ class Service_model extends CI_Model {
 
 	function user_login($data){
 		  // check email exist or not
-        $exist = $this->Common_model->getsingle(USER,array('email'=>$data['email']));
+        $exist = $this->common_model->getsingle(USER,array('email'=>$data['email']));
 
         if(!$exist){
         	return array('status'=>'IE'); //IE invalid email or  not exist
@@ -30,7 +30,7 @@ class Service_model extends CI_Model {
         $update_data['deviceToken'] = $data['deviceToken'];
         $update_data['deviceType']  = $data['deviceType'];
         //update divice token and auth token
-        $update = $this->Common_model->updateFields(USER,$update_data,array('userId'=>$exist->userId)); 
+        $update = $this->common_model->updateFields(USER,$update_data,array('userId'=>$exist->userId)); 
         $user_data  = $this->get_user_by_id($exist->userId); //echo 12; pr($user_data);
         return array('status'=>'SL','user_data'=>$user_data);
 	}

@@ -13,6 +13,7 @@ define('ADMIN_USER_SESS_KEY', 'app_admin_user_sess');
 
 //DB tables
 define('USER', 'users');
+define('ADMIN', 'admin');
 define('USER_POST', 'users_post');
 define('LIKES', 'post_likes');
 define('COMMENTS', 'comments');
@@ -54,6 +55,30 @@ define('APP_ADMIN_ASSETS_JS', 'backend_assets/js/');
 define('APP_ADMIN_ASSETS_CSS', 'backend_assets/css/');
 define('APP_ADMIN_ASSETS_PLUGIN', 'backend_assets/plugins/');
 define('APP_ADMIN_ASSETS_IMG', 'backend_assets/img/');
+define('APP_ADMIN_ASSETS_CUSTOM_JS', 'backend_assets/custom/js/');
+define('APP_ADMIN_ASSETS_CUSTOM_CSS', 'backend_assets/custom/css/');
+
+
+//Backend(ADMIN) assets
+define('CDN_BACK_ASSETS', CDN_URL.'backend_assets/'); //ADMIN THEME
+define('CDN_BACK_DIST_CSS', CDN_BACK_ASSETS.'dist/css/');
+define('CDN_BACK_DIST_JS', CDN_BACK_ASSETS.'dist/js/');
+define('CDN_BACK_DIST_IMG', CDN_BACK_ASSETS.'dist/img/');
+define('CDN_BACK_BUILD', CDN_BACK_ASSETS.'build/');
+define('CDN_BACK_BOOTSTRAP_CSS', CDN_BACK_ASSETS.'bootstrap/css/');
+define('CDN_BACK_BOOTSTRAP_JS', CDN_BACK_ASSETS.'bootstrap/js/');
+define('CDN_BACK_BOOTSTRAP_FONTS', CDN_BACK_ASSETS.'bootstrap/fonts/');
+define('CDN_BACK_PLUGINS', CDN_BACK_ASSETS.'plugins/');
+
+//user uploads
+define('CDN_USER_IMG_PATH', CDN_UPLOAD.'user_avatar/'); //original image
+define('CDN_USER_THUMB_IMG', CDN_USER_IMG_PATH.'thumb/'); //thumb 
+define('CDN_USER_MEDIUM_IMG', CDN_USER_IMG_PATH.'medium/'); //medium 
+define('CDN_USER_LARGE_IMG', CDN_USER_IMG_PATH.'large/'); //large
+
+//placeholders
+define('CDN_PLACEHOLDER_IMG', CDN_UPLOAD.'placeholders/'); //Placeholder folder
+define('CDN_USER_PLACEHOLDER_IMG', CDN_PLACEHOLDER_IMG.'user-placeholder.png'); //user placeholder
 
 /*
 |--------------------------------------------------------------------------

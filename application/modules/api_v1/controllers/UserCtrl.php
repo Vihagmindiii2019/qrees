@@ -73,7 +73,7 @@ class UserCtrl extends Common_Service_Controller
 		$where    = array('userId'=>$user_id);
 
 		//Update user profile
-		$result = $this->Common_model->updateFields(USER, $updatedata, $where);
+		$result = $this->common_model->updateFields(USER, $updatedata, $where);
             //check profile update
             if($result == false){
                 //if not set msg
@@ -102,7 +102,7 @@ class UserCtrl extends Common_Service_Controller
         $user_id  = $this->authData->userId;
         $where    = array('userId'=>$user_id);
         //check for social registered user try to update password
-        $error = $this->Common_model->getsingle(USER,array('userId'=> $user_id));
+        $error = $this->common_model->getsingle(USER,array('userId'=> $user_id));
         if(!empty($error->social_id)){
             $response = array('status' => FAIL, 'message' => "This account is associated with Facebook or Google , so you can't be update password.");
             $this->response($response);
@@ -112,7 +112,7 @@ class UserCtrl extends Common_Service_Controller
         $newPassword = $this->post('newPassword');
         $newPasswordHash = password_hash($this->post('newPassword') , PASSWORD_DEFAULT);
         //get user data from table
-        $userData = $this->Common_model->getsingle(USER,$where,'password');
+        $userData = $this->common_model->getsingle(USER,$where,'password');
         //password verify
         if(password_verify($oldPassword, $userData->password)){
             //check curent and new password are same
@@ -124,7 +124,7 @@ class UserCtrl extends Common_Service_Controller
             //set data for update 
             $updatedata = array('password'=>$newPasswordHash);
             //update password
-            $result = $this->Common_model->updateFields(USER, $updatedata, $where);
+            $result = $this->common_model->updateFields(USER, $updatedata, $where);
             //check password update
             if($result == false){
                 //if not set msg

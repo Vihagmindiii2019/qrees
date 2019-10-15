@@ -30,7 +30,7 @@ class Posts_model extends CI_Model {
 
 	function getCommentDetail($id){
 
-		$result = $this->Common_model->getsingle(COMMENTS, array('commentId' => $id));
+		$result = $this->common_model->getsingle(COMMENTS, array('commentId' => $id));
 		return $result;
 	}
 }

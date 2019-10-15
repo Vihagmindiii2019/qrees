@@ -117,7 +117,7 @@ class PostCtrl extends Common_Service_Controller{
         $userPostMediaUpload['userId']      = $user_id;
 
         if($userPostMediaUpload){
-            $id = $this->Common_model->insertData(USER_POST,$userPostMediaUpload);
+            $id = $this->common_model->insertData(USER_POST,$userPostMediaUpload);
 
             if($id){
                 $response = array('status' => SUCCESS, 'message' => get_response_message(133),'mediaData'=>$mediaData); 
@@ -163,7 +163,7 @@ class PostCtrl extends Common_Service_Controller{
     	$where = array('postId'=>$data['postId'], 'userId' => $user_id);
 
         // check post exist or not 
-    	$exist = $this->Common_model->getsingle(USER_POST, $where, 'totalUserLikes');
+    	$exist = $this->common_model->getsingle(USER_POST, $where, 'totalUserLikes');
     	//pr($exist);
 		if(!$exist){ // post not exist...
 			$response = array('status' => FAIL,'message' => get_response_message(136));
@@ -171,19 +171,19 @@ class PostCtrl extends Common_Service_Controller{
 		}
 
         // check post liked  or not..
-		$check = $this->Common_model->is_data_exists(LIKES, $where);
+		$check = $this->common_model->is_data_exists(LIKES, $where);
 		if($check){ // if post likes then status change post-unlike...
-            $like_id = $this->Common_model->deleteData(LIKES, $where);
+            $like_id = $this->common_model->deleteData(LIKES, $where);
             $likes['totalUserLikes'] = $exist->totalUserLikes - 1;
 		}
         else{ // if post not likes then status change post-like...
-    	   $like_id = $this->Common_model->insertData(LIKES, $data);
+    	   $like_id = $this->common_model->insertData(LIKES, $data);
     	   $likes['totalUserLikes'] = $exist->totalUserLikes + 1;
         }
 
     	if($like_id){
             //update post total likes count..
-    		$update = $this->Common_model->updateFields(USER_POST, $likes, array('postId'=>$data['postId']));
+    		$update = $this->common_model->updateFields(USER_POST, $likes, array('postId'=>$data['postId']));
     		if($update){
     			$response = array('status' => SUCCESS,'message' => get_response_message(123), 'data'=> $likes);
         	$this->response($response);
@@ -211,19 +211,19 @@ class PostCtrl extends Common_Service_Controller{
     	$where = array('postId'=>$data['postId']);
 
         //post exist or not...
-    	$exist = $this->Common_model->getsingle(USER_POST, $where, 'totalUserComments');
+    	$exist = $this->common_model->getsingle(USER_POST, $where, 'totalUserComments');
 		if(!$exist){ // post not exist..
 			$response = array('status' => FAIL,'message' => get_response_message(136));
     		$this->response($response);
 		}
 
         // insert new comment....
-    	$cmt_id = $this->Common_model->insertData(COMMENTS, $data);
+    	$cmt_id = $this->common_model->insertData(COMMENTS, $data);
 
     	if($cmt_id){
             //update total count of comment in post
     		$updateData['totalUserComments'] = $exist->totalUserComments + 1;
-    		$update = $this->Common_model->updateFields(USER_POST, $updateData, $where);
+    		$update = $this->common_model->updateFields(USER_POST, $updateData, $where);
     		if($update){
                 //get comment data...
                 $commentdata = $this->Posts_model->getCommentDetail($cmt_id);
@@ -251,18 +251,18 @@ class PostCtrl extends Common_Service_Controller{
     	$where = array('postId'=>$data['postId']);
 
         //check post exist or not
-    	$exist = $this->Common_model->getsingle(USER_POST, $where, 'totalUserViews');
+    	$exist = $this->common_model->getsingle(USER_POST, $where, 'totalUserViews');
 		if(!$exist){// post not eixst...
 			$response = array('status' => FAIL,'message' => get_response_message(136));
     		$this->response($response);
 		}
         //add user post views..
-    	$insert = $this->Common_model->insertData(VIEWS, $data);
+    	$insert = $this->common_model->insertData(VIEWS, $data);
 
     	if($insert){
             // update post totalview count...
     		$views['totalUserViews'] = $exist->totalUserViews + 1;
-    		$update = $this->Common_model->updateFields(USER_POST, $views, $where);
+    		$update = $this->common_model->updateFields(USER_POST, $views, $where);
     		if($update){
     	        $response = array('status' => SUCCESS,'message' => get_response_message(122), 'data'=> $views);
         	    $this->response($response);
@@ -290,14 +290,14 @@ class PostCtrl extends Common_Service_Controller{
         $where  = array('postId' => $post_id);
 
         //check post id exist or not
-        $exist = $this->Common_model->is_id_exist(USER_POST, 'postId', $post_id);
+        $exist = $this->common_model->is_id_exist(USER_POST, 'postId', $post_id);
         if(!$exist){
             $response = array('status' => FAIL,'message' => get_response_message(136));
             $this->response($response);
         }
 
         //update post detail..
-        $update = $this->Common_model->updateFields(USER_POST, $updateData, $where);
+        $update = $this->common_model->updateFields(USER_POST, $updateData, $where);
 
         // get user post's...
         $this->load->model('user_model');
@@ -325,7 +325,7 @@ class PostCtrl extends Common_Service_Controller{
     	$where  = array('postId' => $post_id, 'userId' => $user_id);
 
         // check post id exist or not
-        $exist = $this->Common_model->is_id_exist(USER_POST, 'postId', $post_id);
+        $exist = $this->common_model->is_id_exist(USER_POST, 'postId', $post_id);
         if(!$exist){// not exist...
             $response = array('status' => FAIL,'message' => get_response_message(136));
             $this->response($response);
@@ -335,7 +335,7 @@ class PostCtrl extends Common_Service_Controller{
         $file_type = $exist->mediaType;
 
     	//delete post and related all likes, comment ,views ,share detail..
-    	$delete = $this->Common_model->deleteData(USER_POST, $where);
+    	$delete = $this->common_model->deleteData(USER_POST, $where);
     	if(!$delete){
             $response = array('status' => FAIL,'message' => get_response_message(107));
             $this->response($response);
@@ -385,14 +385,14 @@ class PostCtrl extends Common_Service_Controller{
         $post_id  = $this->post('postId');
 
         // check post id exist or not
-        $exist = $this->Common_model->is_id_exist(USER_POST, 'postId', $post_id);
+        $exist = $this->common_model->is_id_exist(USER_POST, 'postId', $post_id);
         if(!$exist){// not exist...
             $response = array('status' => FAIL,'message' => get_response_message(136));
             $this->response($response);
         }
 
         // update comment detail...
-        $update = $this->Common_model->updateFields(COMMENTS, $updateData, array('commentId'=>$cmt_id));
+        $update = $this->common_model->updateFields(COMMENTS, $updateData, array('commentId'=>$cmt_id));
 
         //get comment detail...
         $commentdata = $this->Posts_model->getCommentDetail($cmt_id);
@@ -420,14 +420,14 @@ class PostCtrl extends Common_Service_Controller{
         $where  = array('commentId' => $cmt_id, 'userId' => $user_id);
 
         //check post exist or not..
-        $postExist = $this->Common_model->getsingle(USER_POST, array('postId' => $post_id), 'totalUserComments');
+        $postExist = $this->common_model->getsingle(USER_POST, array('postId' => $post_id), 'totalUserComments');
         if(!$postExist){ // not exist...
             $response = array('status' => FAIL,'message' => get_response_message(136));
             $this->response($response);
         }
 
         //delete post comment
-        $delete = $this->Common_model->deleteData(COMMENTS, $where);
+        $delete = $this->common_model->deleteData(COMMENTS, $where);
         if(!$delete){
             $response = array('status' => FAIL,'message' => get_response_message(107));
             $this->response($response);
@@ -435,7 +435,7 @@ class PostCtrl extends Common_Service_Controller{
 
         // update totalUserComments in post table 
         $comments['totalUserComments'] = $postExist->totalUserComments - 1;
-        $update = $this->Common_model->updateFields(USER_POST, $comments, array('postId'=>$post_id));
+        $update = $this->common_model->updateFields(USER_POST, $comments, array('postId'=>$post_id));
 
         $response = array('status' => SUCCESS,'message' => get_response_message(124), 'data'=> $comments);
          $this->response($response);
