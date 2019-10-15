@@ -71,10 +71,10 @@ define('CDN_BACK_BOOTSTRAP_FONTS', CDN_BACK_ASSETS.'bootstrap/fonts/');
 define('CDN_BACK_PLUGINS', CDN_BACK_ASSETS.'plugins/');
 
 //user uploads
-define('CDN_USER_IMG_PATH', CDN_UPLOAD.'user_avatar/'); //original image
-define('CDN_USER_THUMB_IMG', CDN_USER_IMG_PATH.'thumb/'); //thumb 
-define('CDN_USER_MEDIUM_IMG', CDN_USER_IMG_PATH.'medium/'); //medium 
-define('CDN_USER_LARGE_IMG', CDN_USER_IMG_PATH.'large/'); //large
+define('CDN_ADMIN_IMG_PATH', CDN_UPLOAD.'user_avatar/'); //original image
+define('CDN_ADMIN_THUMB_IMG', CDN_ADMIN_IMG_PATH.'thumb/'); //thumb 
+define('CDN_ADMIN_MEDIUM_IMG', CDN_ADMIN_IMG_PATH.'medium/'); //medium 
+define('CDN_ADMIN_LARGE_IMG', CDN_ADMIN_IMG_PATH.'large/'); //large
 
 //placeholders
 define('CDN_PLACEHOLDER_IMG', CDN_UPLOAD.'placeholders/'); //Placeholder folder

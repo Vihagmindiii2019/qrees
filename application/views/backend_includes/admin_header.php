@@ -70,13 +70,22 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url().USER_DEFAULT_AVATAR;?>" class="user-image" alt="User Image">
+              <?php if(!empty($_SESSION[ADMIN_USER_SESS_KEY]['profile_image'])){ ?>
+                <img src="<?php echo CDN_ADMIN_IMG_PATH.$_SESSION[ADMIN_USER_SESS_KEY]['profile_image'];?>" class="user-image" alt="User Image">
+                <?php }else{?>
+                <img src="<?php echo base_url().USER_DEFAULT_AVATAR;;?>" class="user-image" alt="User Image">
+              <?php }?>
               <span class="hidden-xs"><?php echo $_SESSION[ADMIN_USER_SESS_KEY]['fullName'];?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url().USER_DEFAULT_AVATAR; ?>" class="img-circle" alt="User Image">
+
+                <?php if(!empty($_SESSION[ADMIN_USER_SESS_KEY]['profile_image'])){ ?>
+                <img src="<?php echo CDN_ADMIN_MEDIUM_IMG.$_SESSION[ADMIN_USER_SESS_KEY]['profile_image'];?>" class="img-circle" alt="User Image">
+                <?php }else{?>
+                <img src="<?php echo base_url().USER_DEFAULT_AVATAR;;?>" class="user-image" alt="img-circle">
+              <?php }?>
 
                 <p>
                  <?php echo $_SESSION[ADMIN_USER_SESS_KEY]['email'];?>
@@ -121,34 +130,22 @@
             <i class="ion ion-person-add"></i> <span>Users</span>
           </a>
         </li>
-        <li class="treeview ">
-          <a href="" title="Categories">
-              <i class="fa fa-list-alt" title="Categories"></i> 
-              <span title="Categories"> Media Posts</span>
-              <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-          </a>
-
-          <ul class="treeview-menu ">
-              <li class="">
-                  <a href="<?php //echo base_url()?>admin/category"><i class="fa fa-list-alt"></i>Category</a>
-              </li>
-              <li class="">
-                  <a href="<?php //echo base_url();?>admin/sub_category"><i class="fa fa-tasks"></i>Sub-Category</a>
-              </li>
-          </ul>
-        </li>
         <li class="treeview">
-          <a href="<?php //echo base_url();?>admin/collection_types">
+          <a href="<?php echo base_url();?>admin/MediaPost">
+            <i class="fa fa-list-alt"></i> <span>Media Posts</span>
+          </a>
+        </li><li class="treeview">
+          <a href="<?php echo base_url();?>admin/comments">
             <i class="fa fa-tasks"></i> <span>Comments</span>
           </a>
         </li>
         <li class="treeview">
-          <a href="<?php //echo base_url();?>admin/product">
+          <a href="<?php echo base_url();?>admin/likes">
             <i class="fa fa-cubes"></i> <span>Likes</span>
           </a>
         </li>
         <li class="treeview">
-          <a href="<?php //echo base_url();?>admin/setting">
+          <a href="<?php echo base_url();?>admin/PostViews">
             <i class="fa fa-shopping-bag" aria-hidden="true"></i> <span> Posts Views</span>
           </a>
         </li>

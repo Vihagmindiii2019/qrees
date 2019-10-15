@@ -51,8 +51,8 @@ $('#loginButton').on('click',function(){
 
 $(function(){
 
-    var category_table = $("#category_table");
-    var table_post = $('#category_table').DataTable({ 
+    var user_post_table = $("#user_post_table");
+    var table_post = $('#user_post_table').DataTable({ 
       "processing": true, //Feature control the processing indicator.
       "serverSide": true, //Feature control DataTables' servermside processing mode.
       "order": [], //Initial no order.
@@ -75,13 +75,13 @@ $(function(){
 
       // Load data for the table's content from an Ajax source
       "ajax": {
-      "url": base_url + "admin/category/category_list_ajax",
+      "url": base_url + "admin/MediaPost/user_posts_list_ajax",
       // "url": base_url + "admin/users_list_ajax",
       "type": "POST",
       "dataType": "json",
       data:function(d) {
-        var csrf_key = category_table.attr('data-keys');
-        var csrf_hash = category_table.attr('data-values');
+        var csrf_key = user_post_table.attr('data-keys');
+        var csrf_hash = user_post_table.attr('data-values');
         d[csrf_key] = csrf_hash;
       },
       beforeSend: function(){
@@ -94,7 +94,7 @@ $(function(){
         if(jsonData.status==-1){
           location.reload();
         }else{
-        category_table.attr('data-values',jsonData.csrf);
+        user_post_table.attr('data-values',jsonData.csrf);
         return jsonData.data;
         }
       }
@@ -102,71 +102,13 @@ $(function(){
       //Set column definition initialisation properties.
       "columnDefs": [
       { orderable: false, targets: -1 },
+      { orderable: false, targets: -2 },
 
       ]
 
     });
 });//category table end
 
-//collection types table
-$(function(){
-
-    var collection_table = $("#collection_table");
-    var table_post = $('#collection_table').DataTable({ 
-      "processing": true, //Feature control the processing indicator.
-      "serverSide": true, //Feature control DataTables' servermside processing mode.
-      "order": [], //Initial no order.
-
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,    
-      "blengthChange": false,
-      "iDisplayLength" :10,
-
-      "bPaginate": true,
-      "bInfo": true,
-      "bFilter": false,
-      "language": {                
-      "infoFiltered": ""
-      },
-
-      // Load data for the table's content from an Ajax source
-      "ajax": {
-      "url": base_url + "admin/collection_types/collection_types_list_ajax",
-      // "url": base_url + "admin/users_list_ajax",
-      "type": "POST",
-      "dataType": "json",
-      data:function(d) {
-        var csrf_key = collection_table.attr('data-keys');
-        var csrf_hash = collection_table.attr('data-values');
-        d[csrf_key] = csrf_hash;
-      },
-      beforeSend: function(){
-        show_loader()
-      },
-      dataSrc: function (jsonData) {
-        hide_loader();
-        $("#total").text(jsonData.recordsTotal);
-        // $("#iframeloading").hide();
-        if(jsonData.status==-1){
-          location.reload();
-        }else{
-        collection_table.attr('data-values',jsonData.csrf);
-        return jsonData.data;
-        }
-      }
-      },
-      //Set column definition initialisation properties.
-      "columnDefs": [
-      { orderable: false, targets: -1 },
-
-      ]
-
-    });
-});//category table end
 
 //user table 
 $(function(){
@@ -231,8 +173,8 @@ $(function(){
 //add sub category table
 $(function(){
 
-    var sub_category_table = $("#sub_category_table");
-    var table_post = $('#sub_category_table').DataTable({ 
+    var comment_table = $("#comment_table");
+    var table_post = $('#comment_table').DataTable({ 
       "processing": true, //Feature control the processing indicator.
       "serverSide": true, //Feature control DataTables' servermside processing mode.
       "order": [], //Initial no order.
@@ -255,13 +197,13 @@ $(function(){
 
       // Load data for the table's content from an Ajax source
       "ajax": {
-      "url": base_url + "admin/sub_category/sub_category_list_ajax",
+      "url": base_url + "admin/comments/post_comments_list_ajax",
       // "url": base_url + "admin/users_list_ajax",
       "type": "POST",
       "dataType": "json",
       data:function(d) {
-        var csrf_key = sub_category_table.attr('data-keys');
-        var csrf_hash = sub_category_table.attr('data-values');
+        var csrf_key = comment_table.attr('data-keys');
+        var csrf_hash = comment_table.attr('data-values');
         d[csrf_key] = csrf_hash;
       },
       beforeSend: function(){
@@ -274,7 +216,7 @@ $(function(){
         if(jsonData.status==-1){
           location.reload();
         }else{
-        sub_category_table.attr('data-values',jsonData.csrf);
+        comment_table.attr('data-values',jsonData.csrf);
         return jsonData.data;
         }
       }
@@ -291,8 +233,8 @@ $(function(){
 
 //add product table
 $(function(){
-    var product_table = $("#product_table");
-    var table_post = $('#product_table').DataTable({ 
+    var likes_table = $("#likes_table");
+    var table_post = $('#likes_table').DataTable({ 
       "processing": true, //Feature control the processing indicator.
       "serverSide": true, //Feature control DataTables' servermside processing mode.
       "order": [], //Initial no order.
@@ -315,13 +257,13 @@ $(function(){
 
       // Load data for the table's content from an Ajax source
       "ajax": {
-      "url": base_url + "admin/product/product_list_ajax",
+      "url": base_url + "admin/Likes/post_likes_list_ajax",
       // "url": base_url + "admin/users_list_ajax",
       "type": "POST",
       "dataType": "json",
       data:function(d) {
-        var csrf_key = product_table.attr('data-keys');
-        var csrf_hash = product_table.attr('data-values');
+        var csrf_key = likes_table.attr('data-keys');
+        var csrf_hash = likes_table.attr('data-values');
         d[csrf_key] = csrf_hash;
       },
       beforeSend: function(){
@@ -334,7 +276,7 @@ $(function(){
         if(jsonData.status==-1){
           location.reload();
         }else{
-        product_table.attr('data-values',jsonData.csrf);
+        likes_table.attr('data-values',jsonData.csrf);
         return jsonData.data;
         }
       }
@@ -350,8 +292,8 @@ $(function(){
 
 //offer Item list 
 $(function(){
-    var offer_item_table = $("#offer_item_table");
-    var table_post = $('#offer_item_table').DataTable({ 
+    var post_view_table = $("#post_view_table");
+    var table_post = $('#post_view_table').DataTable({ 
       "processing": true, //Feature control the processing indicator.
       "serverSide": true, //Feature control DataTables' servermside processing mode.
       "order": [], //Initial no order.
@@ -374,13 +316,13 @@ $(function(){
 
       // Load data for the table's content from an Ajax source
       "ajax": {
-      "url": base_url + "admin/weekly_offer/product_weekly_list_ajax",
+      "url": base_url + "admin/PostViews/post_view_list_ajax",
       // "url": base_url + "admin/users_list_ajax",
       "type": "POST",
       "dataType": "json",
       data:function(d) {
-        var csrf_key = offer_item_table.attr('data-keys');
-        var csrf_hash = offer_item_table.attr('data-values');
+        var csrf_key = post_view_table.attr('data-keys');
+        var csrf_hash = post_view_table.attr('data-values');
         d[csrf_key] = csrf_hash;
       },
       beforeSend: function(){
@@ -393,7 +335,7 @@ $(function(){
         if(jsonData.status==-1){
           location.reload();
         }else{
-        offer_item_table.attr('data-values',jsonData.csrf);
+        post_view_table.attr('data-values',jsonData.csrf);
         return jsonData.data;
         }
       }
@@ -407,134 +349,6 @@ $(function(){
     });
 });//product table end
 
-
-//add category modal start
-var add_category_modal = function (controller) {
-
-  var userType=$('.userTypeGet').data('user-type');
-  $.ajax({
-      url: base_url + controller + "/category/add_category_modal",
-      // 
-      type: 'GET',
-      data:{'userType':userType},
-
-      success: function (data, textStatus, jqXHR) {
-          $('#add_category').html(data);
-          $("#Modal").modal('show');
-
-      }
-  });
-} //END OF ADD CATEGORY MODAL
-
-//add collection modal start
-var add_collection_popup = function (controller) {
-
-  var userType=$('.userTypeGet').data('user-type');
-  $.ajax({
-      url: base_url + controller + "/collection_types/add_collection_modal",
-      // 
-      type: 'GET',
-      data:{'userType':userType},
-
-      success: function (data, textStatus, jqXHR) {
-        console.log('success');
-          $('#add_collction').html(data);
-          $("#collectionModal").modal('show');
-
-      }
-  });
-} //END OF ADD COLLECION MODAL
-
-//add product modal start
-var add_product_modal = function (controller) {
-
-  var userType=$('.userTypeGet').data('user-type');
-  $.ajax({
-      url: base_url + controller + "/product/add_product_modal",
-      // 
-      type: 'GET',
-      data:{'userType':userType},
-
-      success: function (data, textStatus, jqXHR) {
-          $('#add_product').html(data);
-          $("#addProductModal").modal('show');
-
-      }
-  });
-} //END OF ADD PRODUCT MODAL
-
-//add category modal start
-var add_sub_category_modal = function (controller) {
-
-  var userType=$('.userTypeGet').data('user-type');
-  $.ajax({
-      url: base_url + controller + "/sub_category/add_sub_category_modal",
-      // 
-      type: 'GET',
-      data:{'userType':userType},
-
-      success: function (data, textStatus, jqXHR) {
-          $('#add_sub_category').html(data);
-          $("#Modal").modal('show');
-
-      }
-  });
-} //END OF ADD SUB CATEGORY MODAL
-
-//edit category modal start
-var editCategory = function (controller,categoryId) {
-
-  var userType=$('.userTypeGet').data('user-type');
-  $.ajax({
-      url: base_url + controller,
-      // 
-      type: 'GET',
-      data:{'categoryId':categoryId},
-
-      success: function (data, textStatus, jqXHR) {
-          $('#edit_category').html(data);
-          $("#editModal").modal('show');
-
-      }
-  });
-} //END OF EDIT CATEGORY MODAL
-
-//edit collection modal start
-var editCollection = function (controller,collceionId) {
-
-  var userType=$('.userTypeGet').data('user-type');
-  $.ajax({
-      url: base_url + controller,
-      // 
-      type: 'GET',
-      data:{'collectionTypeId':collceionId},
-
-      success: function (data, textStatus, jqXHR) {
-          $('#edit_collection').html(data);
-          $("#editCollectionModal").modal('show');
-
-      }
-  });
-} //END OF EDIT CATEGORY MODAL
-
-
-//edit sub category modal start
-var editSubCategory = function (controller,categoryId) {
-
-  var userType=$('.userTypeGet').data('user-type');
-  $.ajax({
-      url: base_url + controller,
-      // 
-      type: 'GET',
-      data:{'categoryId':categoryId},
-
-      success: function (data, textStatus, jqXHR) {
-          $('#edit_sub_category').html(data);
-          $("#editSubModal").modal('show');
-
-      }
-  });
-} //END OF EDIT SUB CATEGORY MODAL
 
 //starts of user status change function
 var statuChangeUser = function(ctr,id){
@@ -561,72 +375,7 @@ var statuChangeUser = function(ctr,id){
     });
 }
 
-//starts of Category status change function
-var deleteCategory= function(ctr,id){
-  bootbox.confirm({
-    message: "Are you sure you want to delete this ?",
-    buttons: {
-        confirm: {
-            label: 'OK',
-            className: 'btn btn-primary'
-        },
-        cancel: {
-            label: 'Cancel',
-            className: 'btn-default'
-        }
-    },
-    callback: function (result) {
-        if (result){
-        $.ajax({
-          url:base_url + ctr ,
-          type: 'GET',
-          data:{'id':id},
-          success: function(data){ 
-            var res = JSON.parse(data);
-            if(res.status==1){
 
-            setTimeout(function(){
-            window.location=res.url},
-            2000),
-            toastr.success(res.message)
-
-
-            }else{
-              toastr.error(res.message);
-
-            }
-          }
-
-        });
-      }
-    }
-  });
-}
-
-//starts of Category status change function
-var statuChangeCategory= function(ctr,id){
-    $.ajax({
-      url:base_url + ctr ,
-      type: 'GET',
-      data:{'id':id},
-      success: function(data){ 
-        var res = JSON.parse(data);
-        if(res.status==1){
-
-        setTimeout(function(){
-        window.location=res.url},
-        2000),
-        toastr.success(res.message)
-
-
-        }else{
-          toastr.error(res.message);
-
-        }
-      }
-
-    });
-}
 
 //preview of image
 jQuery('body').on('click', '.remove_img1', function () {
@@ -692,7 +441,7 @@ jQuery('body').on('click', '.remove_img1', function () {
     });
 
     //start delete product
-    var deleteProduct = function (controller,productId) {
+    var deleteUserPost = function (controller,productId) {
         
         bootbox.confirm({
             message: "Are you sure you want to change status ?",
@@ -740,7 +489,7 @@ jQuery('body').on('click', '.remove_img1', function () {
 
 
     //start offer item product
-    var deleteOfferItem = function (controller,productId) {
+    var deletePostComment = function (controller,productId) {
         
         bootbox.confirm({
             message: "Are you sure you want to delete this product from weekly offer list ?",
@@ -949,7 +698,7 @@ jQuery('body').on('click', '.remove_img1', function () {
   });
 
 
-// variant values table
+/*// variant values table
 $(function(){
   var variant_table = $('#variant_values_table');
   var table_post = $('#variant_values_table').DataTable({ 
@@ -1040,99 +789,7 @@ var editVariantValues = function (controller,variantValueId) {
 
       }
   });
-} //END OF EDIT VARIANT VALUES MODAL
-
-//function for adding product in offer this week
-var addOfferWeek = function(controller,productId) {
-    $.ajax({
-        type: "POST",
-        url: base_url+controller,
-        dataType:'json',
-        data: {productId:productId}, //only input
-        // processData: false,
-        // contentType: false,
-      beforeSend: function (){
-                show_loader()
-                },
-      success: function(data){ 
-        hide_loader();
-        console.log(data);
-        if(data.status==1){
-            toastr.remove();
-            toastr.clear();
-              toastr.success(data.message)
-        }else{
-            $('#csrfs').val(data.csrf);
-            toastr.remove();
-            toastr.clear();
-            toastr.error(data.message);
-
-        }
-        }
-    });  
-}
-//for image cropping
-   
+} //END OF EDIT VARIANT VALUES MODAL*/
 
 
-//google place api
-    function initializeAdd() {
-
-    var autocomplete = new google.maps.places.Autocomplete(document.getElementById("address"));
-
-    // Set the data fields to return when the user selects a place.
-    autocomplete.setFields(
-    ['address_components', 'geometry', 'icon', 'name']);
-
-    autocomplete.addListener('place_changed', function() {
-
-    var place = autocomplete.getPlace();
-
-    //console.log(place.formatted_address);
-    var country = '', city = '', cityAlt = ''; state = '';
-
-    if(place.address_components){
-
-        for(var i = 0; i < place.address_components.length; i += 1) {
-
-        var addressObj = place.address_components[i];
-
-        for(var j = 0; j < addressObj.types.length; j += 1) {
-
-            if (!country && addressObj.types[j] === 'country') {
-
-                //console.log(addressObj.types[j]); // confirm that this is 'country'
-                country = addressObj.long_name; // confirm that this is the country name
-            }
-
-            if (!state && addressObj.types[j] === 'administrative_area_level_1') {
-
-                //console.log(addressObj.types[j]); // confirm that this is 'state'
-                state = addressObj.long_name; // confirm that this is the state name
-            }
-
-            if (!city && addressObj.types[j] === 'administrative_area_level_2') {
-
-                //console.log(addressObj.types[j]); // confirm that this is 'city'
-                city = addressObj.long_name; // confirm that this is the city name
-            } 
-        }
-
-        if (city && state && country) {
-        break;
-        }
-        } 
-
-        var lat = place.geometry.location.lat(),
-        lng = place.geometry.location.lng(),
-        addr = place.formatted_address;
-        $("#usrsadd").val(addr);
-        $("#latitude").val(lat);
-        $("#longitude").val(lng);
-        $('#eventCity').val(city);
-        $('#state').val(state);
-        $('#eventCountry').val(country);
-    }
-    });
-}
-    google.maps.event.addDomListener(window, 'load', initializeAdd); //initialise google autocomplete API on load
+    

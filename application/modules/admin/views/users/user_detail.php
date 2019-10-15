@@ -6,12 +6,12 @@ padding-left: 18px;
 </style>
 <?php 
 if(!empty($info->profileImage && (empty($info->is_profile_url)))){ 
-        $file = CDN_USER_MEDIUM_IMG.$info->profileImage;
-        $fileName = CDN_USER_MEDIUM_IMG.$info->profileImage;
+        $file = CDN_ADMIN_MEDIUM_IMG.$info->profileImage;
+        $fileName = CDN_ADMIN_MEDIUM_IMG.$info->profileImage;
       }elseif(!empty($info->is_profile_url)){
         $fileName = $info->profileImage;
       }else{
-        $fileName = USER_DEFAULT_AVATAR;
+        $fileName = base_url().USER_DEFAULT_AVATAR;
       }
 ?>
 <div class="content-wrapper">

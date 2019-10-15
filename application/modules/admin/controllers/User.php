@@ -22,12 +22,12 @@ class User extends Common_Back_Controller {
 	        $data = array();
 	        foreach ($list as $userData) {
 			if(!empty($userData->profileImage && (empty($userData->is_profile_url)))){ 
-				$file = CDN_USER_THUMB_IMG.$userData->profileImage;
-				$fileName = CDN_USER_THUMB_IMG.$userData->profileImage;
+				$file = CDN_ADMIN_THUMB_IMG.$userData->profileImage;
+				$fileName = CDN_ADMIN_THUMB_IMG.$userData->profileImage;
 			}elseif(!empty($userData->is_profile_url)){
 				$fileName = $userData->profileImage;
 			}else{
-				$fileName = USER_DEFAULT_AVATAR;
+				$fileName = base_url().USER_DEFAULT_AVATAR;
 			}
 	        $action ='';
 	        $no++;
@@ -73,15 +73,15 @@ class User extends Common_Back_Controller {
     	//$this->check_admin_ajax_auth();
     	$id = $_GET['id'];
     	$where = array('userId'=>$id,'status'=>1);
-    	$dataexist = $this->common_model->is_data_exists(USERS,$where);
+    	$dataexist = $this->common_model->is_data_exists(USER,$where);
     	if(!empty($dataexist)){
 	    	$dataZero = array('status'=>0);
-	    	$update = $this->common_model->updateFields(USERS,$dataZero,$where);
+	    	$update = $this->common_model->updateFields(USER,$dataZero,$where);
 	    	$message = 'User inactivated successfully';
     	}else{
     		$wheres = array('userId'=>$id);
     		$dataOne = array('status'=>1);
-	    	$update = $this->common_model->updateFields(USERS,$dataOne,$wheres);
+	    	$update = $this->common_model->updateFields(USER,$dataOne,$wheres);
 	    	$message = 'User activated successfully';
     	}
     	if($update){
