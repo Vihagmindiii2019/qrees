@@ -51,12 +51,7 @@ class Comments extends Common_Back_Controller {
 	        echo json_encode($output);
   	}//END OF CATEGORY LISTING FUNCTION
 
-  	function add_sub_category_modal(){
-		$data['title'] = 'Add Category';
-		$data['commentData'] = $this->comments_model->getcategory(CATEGORY,array('parent_category_id'=>0));
-		//$this->check_admin_ajax_auth();
-		$this->load->view('sub_category/add_sub_category', $data);
-	} //END OF ADD CATEGORY MODAL
+  	
 
 	
 

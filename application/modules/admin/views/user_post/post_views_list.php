@@ -3,12 +3,12 @@
   <section class="content">
       <section class="content-header">
         <h1>
-        Post Comments(<span id="total"></span>)
+        Posts Views(<span id="total"></span>)
         </h1>
         <!-- -->
         <ol class="breadcrumb">
           <li><a href="<?php echo base_url('admin/dashboard');?>"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active"><a href="#">Post-Comments List</a></li>
+          <li class="active"><a href="#">Posts-Views List</a></li>
         </ol> 
       </section>
       <div class="row">
@@ -22,13 +22,13 @@
 
             <?php  $csrf = get_csrf_token()['hash'];?>
 
-            <table id="comment_table" class="table" data-keys="<?php echo get_csrf_token()['name'];?>" data-values="<?php echo $csrf;?>">
+            <table id="post_view_table" class="table" data-keys="<?php echo get_csrf_token()['name'];?>" data-values="<?php echo $csrf;?>">
               <thead>
                 <th>S.No.</th>
                 <th>Post Title</th> 
                 <th>User</th> 
                 <th>Email</th>  
-                <th>Comment Message</th> 
+                <th>Post Description</th> 
                 <th style="width: 12%">Action</th>
               </thead>
               <tbody>
