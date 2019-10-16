@@ -30,10 +30,8 @@ class Comments extends Common_Back_Controller {
           	$row[] = display_placeholder_text($commentData->commentMsg);
           //$row[] = display_placeholder_text($commentData->description);
          
-	        $clk_edit =  "editSubCategory('admin/sub_category/edit_sub_category_modal','$commentData->commentId');" ;
-          $delete = "deleteCategory('admin/category/delete_category',$commentData->commentId);";
-          $action = '<a style="font-size:17px;" href="javascript:void(0)" onclick="'.$clk_edit.'" class="on-default edit-row table_action" ><i style="font-size:17px;" class="fa fa-pencil-square-o text-success" aria-hidden="true"></i></a> ';
-          $action .=  ' <a style="font-size:17px;" href="javascript:void(0)"onclick="'.$delete.'" class="on-default edit-row table_action danger"><i  class="fa fa-trash text-danger" aria-hidden="true"></i></a>';
+          $delete = "deleteComment('admin/Comments/delete_comment',$commentData->commentId);";
+          $action .= ' <a style="font-size:17px;" href="javascript:void(0)"onclick="'.$delete.'" class="on-default edit-row table_action danger">  <i  class="fa fa-trash text-danger" aria-hidden="true"></i></a>';
 
 	        $row[] = $action;
 	        $data[] = $row;

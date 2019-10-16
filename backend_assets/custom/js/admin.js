@@ -51,8 +51,8 @@ $('#loginButton').on('click',function(){
 
 $(function(){
 
-    var user_post_table = $("#user_post_table");
-    var table_post = $('#user_post_table').DataTable({ 
+    var user_post_table = $("#post_table");
+    var table_post = $('#post_table').DataTable({ 
       "processing": true, //Feature control the processing indicator.
       "serverSide": true, //Feature control DataTables' servermside processing mode.
       "order": [], //Initial no order.
@@ -75,7 +75,7 @@ $(function(){
 
       // Load data for the table's content from an Ajax source
       "ajax": {
-      "url": base_url + "admin/MediaPost/user_posts_list_ajax",
+      "url": base_url + "admin/MediaPost/posts_list_ajax",
       // "url": base_url + "admin/users_list_ajax",
       "type": "POST",
       "dataType": "json",
@@ -107,7 +107,7 @@ $(function(){
       ]
 
     });
-});//category table end
+});//post table end
 
 
 //user table 
@@ -697,6 +697,66 @@ jQuery('body').on('click', '.remove_img1', function () {
     });
   });
 
+$(function(){
+
+    var user_post_table = $("#user_post_table");
+    var table_post = $('#user_post_table').DataTable({ 
+      "processing": true, //Feature control the processing indicator.
+      "serverSide": true, //Feature control DataTables' servermside processing mode.
+      "order": [], //Initial no order.
+
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,    
+      "blengthChange": false,
+      "iDisplayLength" :10,
+
+      "bPaginate": true,
+      "bInfo": true,
+      "bFilter": false,
+      "language": {                
+      "infoFiltered": ""
+      },
+
+      // Load data for the table's content from an Ajax source
+      "ajax": {
+      "url": base_url + "admin/user/user_posts_list_ajax",
+      // "url": base_url + "admin/users_list_ajax",
+      "type": "POST",
+      "dataType": "json",
+      data:function(d) {
+        d.id = user_post_table.attr('data-id');
+        var csrf_key = user_post_table.attr('data-keys');
+        var csrf_hash = user_post_table.attr('data-values');
+        d[csrf_key] = csrf_hash;
+      },
+      beforeSend: function(){
+        show_loader()
+      },
+      dataSrc: function (jsonData) {
+        hide_loader();
+        // $("#iframeloading").hide();
+        $('#total').html(jsonData.recordsFiltered);
+        if(jsonData.status==-1){
+          location.reload();
+        }else{
+        user_post_table.attr('data-values',jsonData.csrf);
+        return jsonData.data;
+        }
+      }
+      },
+      //Set column definition initialisation properties.
+      "columnDefs": [
+      { orderable: false, targets: -1 },
+      { orderable: false, targets: -2 },
+
+      ]
+
+    });
+});//category table end
 
 /*// variant values table
 $(function(){

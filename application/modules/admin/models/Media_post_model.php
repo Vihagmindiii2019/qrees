@@ -98,10 +98,14 @@ class Media_post_model extends CI_Model{
 	}
 
 	//function for name of category
-	function getcategory($table, $where) {
-        $this->db->where($where);
-        $q = $this->db->get($table);
-        return $q->result();
+	function getPostData($id) {
+        if(!empty($id)){//post Id
+            $this->db->where('postId',$id);
+            $data = $this->db->get(USER_POST)->row();
+            return $data;
+        }else{
+            return FALSE;
+        }
     }
 
 

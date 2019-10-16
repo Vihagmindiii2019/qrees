@@ -132,21 +132,21 @@
         </li>
         <li class="treeview">
           <a href="<?php echo base_url();?>admin/MediaPost">
-            <i class="fa fa-list-alt"></i> <span>Media Posts</span>
+            <i class="fa fa-list-alt margin-r-5"></i> <span>Media Posts</span>
           </a>
         </li><li class="treeview">
           <a href="<?php echo base_url();?>admin/comments">
-            <i class="fa fa-tasks"></i> <span>Comments</span>
+            <i class="fa fa-comments-o margin-r-5"></i> <span>Comments</span>
           </a>
         </li>
         <li class="treeview">
           <a href="<?php echo base_url();?>admin/likes">
-            <i class="fa fa-cubes"></i> <span>Likes</span>
+            <i class="fa fa-thumbs-o-up margin-r-5"></i> <span>Likes</span>
           </a>
         </li>
         <li class="treeview">
           <a href="<?php echo base_url();?>admin/PostViews">
-            <i class="fa fa-shopping-bag" aria-hidden="true"></i> <span> Posts Views</span>
+            <i class="fa fa-tasks margin-r-5" aria-hidden="true"></i> <span> Posts Views</span>
           </a>
         </li>
       </ul>

@@ -63,7 +63,7 @@ if(!empty($info->profileImage && (empty($info->is_profile_url)))){
             <hr>
             <strong><i class="fa fa-phone margin-r-5"></i> Contact Number</strong>
 
-            <p class="text-muted detail">+91-6260149658</p>
+            <p class="text-muted detail">+91-8319478164</p>
 
             <hr>
             <strong><i class="fa fa-map-marker margin-r-5"></i> Address</strong>
@@ -93,29 +93,47 @@ if(!empty($info->profileImage && (empty($info->is_profile_url)))){
           </ul>
           <div class="tab-content">
             <div class="active tab-pane" id="settings">
-
-
+              <h4> Total Posts(<span id="total"></span>)</h4>
               <div class="row">
-                <span class="add-btn" style="display:  block;text-align: right;">
-                </span>
+                <!-- <span class="add-btn" style="display: block;text-align: left; padding-left: 10%;"> User-Posts(<span id="total"></span>)</span> -->
+                
 
-                        <!-- /.box-header -->
+                <!--.box-body -->
                 <div class="box-body ">
-                           
+                  <?php  $csrf = get_csrf_token()['hash'];?>
+                  <table id="user_post_table" class="table" data-keys="<?php echo get_csrf_token()['name'];?>" data-values="<?php echo $csrf;?>" data-id="<?php echo $_GET['id'];?>">
+                    <thead>
+                      <th>S.No.</th>
+                      <th>Title</th> 
+                      <th>Media Type</th> 
+                      <th>Description</th> 
+                      <th>Comments</th> 
+                      <th>Likes</th> 
+                      <th>Views</th> 
+                      <th style="width: 12%">Action</th>
+                    </thead>
+                    <tbody>
 
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                  </table> 
+                  <!-- /.table -->      
                 </div>
-              <!-- /.tab-pane -->
+                <!-- /.box-body -->
               </div>
-            <!-- /.tab-content -->
+              <!-- /.row -->            
             </div>
-          <!-- /.nav-tabs-custom -->
+            <!-- /.tab-pane -->          
           </div>
-        <!-- /.col -->
+          <!-- /.tab-content -->        
         </div>
+        <!-- /.nav-tabs-custom -->
       </div>
+      <!-- /.col -->
     </div>
-  <!-- /.row -->
-
+    <!-- /.row -->
   </section>
-<!-- /.content -->
+  <!-- /.content -->
 </div>

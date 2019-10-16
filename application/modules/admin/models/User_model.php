@@ -4,7 +4,6 @@ class User_model extends CI_Model{
 
 	var $table = USER;
     var $column_order = array(null, 'b.profileImage', 'b.userName','b.email','b.status');  //set column field database for datatable orderable
-    var $table_col= array(null,'b.userNmae', 'b.email');
     var $column_search = array('b.userName', 'b.email'); //set column field database for datatable searchable
     var $order = array('b.userId' => 'DESC');  // default order
     var $where = '';
@@ -59,17 +58,6 @@ class User_model extends CI_Model{
             
             if(!empty($this->where))
                 $this->db->where($this->where); 
-               
-            //for category filter
-            $count_val = count($_POST['columns']);
-            for($i=1;$i<=$count_val;$i++){ 
-
-
-                if(!empty($_POST['columns'][$i]['search']['value'])){ 
-
-                    $this->db->where(array($this->table_col[$i]=>$_POST['columns'][$i]['search']['value'])); 
-                }
-            }
 
 
             if(isset($_POST['order'])) // here order processing
@@ -115,6 +103,7 @@ class User_model extends CI_Model{
 
     public function getData($id){
         if(!empty($id)){//user Id
+            $this->db->select("userId,userName,email,profileImage,status");
             $data = $this->db->where('userId',$id)->get(USER)->row();
             return $data;
         }else{

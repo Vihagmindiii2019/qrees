@@ -22,7 +22,7 @@
 
             <?php  $csrf = get_csrf_token()['hash'];?>
 
-            <table id="user_post_table" class="table" data-keys="<?php echo get_csrf_token()['name'];?>" data-values="<?php echo $csrf;?>">
+            <table id="post_table" class="table" data-keys="<?php echo get_csrf_token()['name'];?>" data-values="<?php echo $csrf;?>">
               <thead>
                 <th>S.No.</th>
                 <th>User Name</th> 

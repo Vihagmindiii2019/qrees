@@ -31,7 +31,7 @@
             <div class="icon">
               <i class="fa fa-list-alt"></i>
             </div>
-            <a href="<?php //echo base_url();?>admin/category" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url();?>admin/MediaPost" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
@@ -41,12 +41,12 @@
             <div class="inner">
               <h3><?php echo $total_post_views;?></h3>
 
-              <p>Posts Views</p>
+              <p>All Posts Views</p>
             </div>
             <div class="icon">
-              <i class="fa fa-shopping-bag"></i>
+              <i class="fa fa-tasks margin-r-5"></i>
             </div>
-            <a href="<?php //echo base_url();?>admin/sub_category" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url();?>admin/PostViews" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
@@ -64,32 +64,49 @@
             <a href="<?php echo base_url();?>admin/user" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-blue">
             <div class="inner">
               <h3><?php echo $total_comments;?></h3>
 
-              <p>Comments</p>
+              <p> Total Comments</p>
             </div>
             <div class="icon">
-              <i class="fa fa-tasks"></i>
+              <i class="fa fa-comments-o margin-r-5"></i>
             </div>
-            <a href="<?php //echo base_url();?>admin/product" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url();?>admin/Comments" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-purple">
             <div class="inner">
               <h3><?php echo $total_likes;?></h3>
 
-              <p>Users Likes</p>
+              <p>Total User Likes</p>
             </div>
             <div class="icon">
-              <i class="fa fa-cubes"></i>
+              <i class="fa fa-thumbs-o-up margin-r-5"></i>
             </div>
-            <a href="<?php //echo base_url();?>admin/collection_types" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url();?>admin/Likes" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-purple">
+            <div class="inner">
+              <h3><?php echo $total_post_share;?></h3>
+
+              <p>Total Posts Share</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-share margin-r-5"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         

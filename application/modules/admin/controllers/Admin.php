@@ -45,6 +45,7 @@ class Admin extends Common_Back_Controller {
 	  	$data['title'] =  'Dashboard';
       $data['total_post'] = $this->login_model->getCount($where='',USER_POST);
       $data['total_post_views'] = $this->login_model->getCount($where='',VIEWS);
+      $data['total_post_share'] = $this->login_model->getCount($where='',POST_SHARE);
       $data['total_users'] = $this->login_model->getCount($where='',USER);
       $data['total_comments'] = $this->login_model->getCount($where='',COMMENTS);
       $data['total_likes'] = $this->login_model->getCount($where='',LIKES);

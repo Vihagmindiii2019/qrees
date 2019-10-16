@@ -100,5 +100,50 @@ class User extends Common_Back_Controller {
 		$this->load->admin_render('users/user_detail',$data);
 	}
 
+	function user_posts_list_ajax(){
+  		//$this->check_admin_ajax_auth();
+  		$this->load->model('user_post_model');
+  		
+  		/*echo $id; 
+  		die();*/
+	    $no = $_POST['start'];
+	    $list = $this->user_post_model->get_list();
+	        $data = array();
+	        foreach ($list as $postData) {
+	        $action ='';
+	        $no++;
+	        $row = array();
+	        $row[] = display_placeholder_text($no); 
+            $row[] = display_placeholder_text($postData->title);
+            $row[] = display_placeholder_text($postData->mediaType);
+            $row[] = display_placeholder_text($postData->description);
+            $row[] = display_placeholder_text($postData->totalUserLikes);
+	        $row[] = display_placeholder_text($postData->totalUserComments); 
+	        $row[] = display_placeholder_text($postData->totalUserViews); 
+
+            $postId = encoding($postData->postId);
+            $delete = "deleteCategory('admin/MediaPost/deletePost',$postData->postId);";
+	        $action = '<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> <span class="caret"></span> <div class="ripple-container"></div></button>
+                    <ul class="dropdown-menu">
+                      <li><a style="font-size:17px;" href="javascript:void(0)"onclick="'.$delete.'" class="on-default edit-row table_action danger"><i class="fa fa-trash text-danger" aria-hidden="true"></i>Delete</a></li>
+                    </ul>
+                </div>';
+
+	        $row[] = $action;
+	        $data[] = $row;
+
+	        }
+
+	        $output = array(
+	            "draw" => $_POST['draw'],
+	            "recordsTotal" => $this->user_post_model->count_all(),
+	            "recordsFiltered" => $this->user_post_model->count_filtered(),
+	            "data" => $data,
+	            "csrf"=>get_csrf_token()['hash']
+	        );
+	        //output to json format
+	        echo json_encode($output);
+  	}//END OF CATEGORY LISTING FUNCTION
+
 }
 ?>
