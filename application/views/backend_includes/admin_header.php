@@ -122,12 +122,12 @@
         
         <li class="treeview">
           <a href="<?php echo base_url();?>admin/dashboard">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <i class="fa fa-dashboard margin-r-5"></i> <span>Dashboard</span>
           </a>
         </li>
         <li class="treeview">
           <a href="<?php echo base_url();?>admin/user">
-            <i class="ion ion-person-add"></i> <span>Users</span>
+            <i class="ion ion-person-add margin-r-5"></i> <span>Users</span>
           </a>
         </li>
         <li class="treeview">

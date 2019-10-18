@@ -12,7 +12,7 @@ class MediaPost extends Common_Back_Controller {
   		$data['title'] = 'User Posts List';
   		$this->load->admin_render('user_post/user_posts_list',$data);
 
-  	}//END OF CATEGORY LIST FUCTION
+  	}//END OF POST LIST FUCTION
 
   	function posts_list_ajax(){
   		//$this->check_admin_ajax_auth();
@@ -27,7 +27,13 @@ class MediaPost extends Common_Back_Controller {
 	        $row[] = display_placeholder_text($postData->userName); 
             $row[] = display_placeholder_text($postData->email);
             $row[] = display_placeholder_text($postData->title);
-            $row[] = display_placeholder_text($postData->mediaType);
+            if($postData->mediaType == 1){
+            	$row[] = 'Image';
+            }else if($postData->mediaType == 2){
+            	$row[] = 'Video';
+            }else{
+            	$row[] = 'Audio';
+            }
             $row[] = display_placeholder_text($postData->description);
 
             $postId = encoding($postData->postId);
@@ -53,14 +59,7 @@ class MediaPost extends Common_Back_Controller {
 	        );
 	        //output to json format
 	        echo json_encode($output);
-  	}//END OF CATEGORY LISTING FUNCTION
-
-  	function add_sub_category_modal(){
-		$data['title'] = 'Add Category';
-		$data['postData'] = $this->media_post_model->getcategory(CATEGORY,array('parent_category_id'=>0));
-		//$this->check_admin_ajax_auth();
-		$this->load->view('sub_category/add_sub_category', $data);
-	} //END OF ADD CATEGORY MODAL
+  	}//END OF POST LISTING FUNCTION
 
 	function post_detail(){
 

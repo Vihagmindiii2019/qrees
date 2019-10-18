@@ -441,6 +441,135 @@ class PostCtrl extends Common_Service_Controller{
          $this->response($response);
         
     }
+
+    function getPostLikes_get(){
+        $this->check_service_auth();
+
+        $post_id = $this->get('postId');
+        if(empty($post_id)){
+            $response = array('status' => FAIL,'message' => "Post Id is required?");
+            $this->response($response);
+        }
+
+        //check post exist or not..
+        $postExist = $this->common_model->getsingle(USER_POST, array('postId' => $post_id), 'totalUserComments');
+        if(!$postExist){ // not exist...
+            $response = array('status' => FAIL,'message' => get_response_message(136));
+            $this->response($response);
+        }
+
+        //pr($_GET);
+
+        $likeData = $this->Posts_model->get_all_like($post_id);
+
+        if(!$likeData){
+            //set failure msg
+            $response = array('status' => FAIL,'message' => get_response_message(106), 'userDetail' => '');
+            $this->response($response);
+        }
+        //set success msg
+        $response = array('status' => SUCCESS,'message' => get_response_message(112), 'data'=> $likeData);
+        $this->response($response);
+    }
+
+
+    function getPostViews_get(){
+
+        $this->check_service_auth();
+        //$user_id = $this->authData->userId;
+
+        $post_id = $this->get('postId');
+        if(empty($post_id)){
+            $response = array('status' => FAIL,'message' => "Post Id is required?");
+            $this->response($response);
+        }
+
+        //check post exist or not..
+        $postExist = $this->common_model->getsingle(USER_POST, array('postId' => $post_id), 'totalUserComments');
+        if(!$postExist){ // not exist...
+            $response = array('status' => FAIL,'message' => get_response_message(136));
+            $this->response($response);
+        }
+
+        $viewData = $this->Posts_model->get_all_views($post_id);
+
+        if(!$viewData){
+            //set failure msg
+            $response = array('status' => FAIL,'message' => get_response_message(106), 'userDetail' => '');
+            $this->response($response);
+        }
+        //set success msg
+        $response = array('status' => SUCCESS,'message' => get_response_message(112), 'data'=> $viewData);
+        $this->response($response);
+    }
+
+    function getPostComments_get(){
+
+        $this->check_service_auth();
+        //$user_id = $this->authData->userId;
+
+        $post_id = $this->get('postId');
+        if(empty($post_id)){
+            $response = array('status' => FAIL,'message' => "Post Id is required?");
+            $this->response($response);
+        }
+
+        //check post exist or not..
+        $postExist = $this->common_model->getsingle(USER_POST, array('postId' => $post_id), 'totalUserComments');
+        if(!$postExist){ // not exist...
+            $response = array('status' => FAIL,'message' => get_response_message(136));
+            $this->response($response);
+        }
+
+        $commentData = $this->Posts_model->get_all_comment($post_id);
+
+        if(!$commentData){
+            //set failure msg
+            $response = array('status' => FAIL,'message' => get_response_message(106), 'userDetail' => '');
+            $this->response($response);
+        }
+        //set success msg
+        $response = array('status' => SUCCESS,'message' => get_response_message(112), 'data'=> $commentData);
+        $this->response($response);
+    }
+
+    function createPostShare_post(){
+
+        $this->check_service_auth();
+        $user_id = $this->authData->userId;
+
+        $this->form_validation->set_rules('postId','Post Id ','trim|required');
+
+        if($this->form_validation->run() == false){
+            $response = array('status' => FAIL,'message' => strip_tags(validation_errors()));
+            $this->response($response);
+        }
+
+        $data['userId'] = $user_id;
+        $data['postId'] = $this->post('postId');
+        $where = array('postId'=>$data['postId']);
+
+        //check post exist or not
+        $exist = $this->common_model->getsingle(USER_POST, $where, 'totalPostShare');
+        if(!$exist){// post not eixst...
+            $response = array('status' => FAIL,'message' => get_response_message(136));
+            $this->response($response);
+        }
+
+
+        //add user post views..
+        $insert = $this->common_model->insertData(POST_SHARE, $data);
+
+        if($insert){
+            // update post totalview count...
+            $share['totalPostShare'] = $exist->totalPostShare + 1;
+            $update = $this->common_model->updateFields(USER_POST, $share, $where);
+            if($update){
+                $response = array('status' => SUCCESS,'message' => get_response_message(122), 'data'=> $share);
+                $this->response($response);
+            }
+        }
+    }
 	
 
 }

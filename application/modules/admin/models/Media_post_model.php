@@ -97,7 +97,7 @@ class Media_post_model extends CI_Model{
 	return $this->db->count_all_results();
 	}
 
-	//function for name of category
+	//function for get all Posts
 	function getPostData($id) {
         if(!empty($id)){//post Id
             $this->db->where('postId',$id);
